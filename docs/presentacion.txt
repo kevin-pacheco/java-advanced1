@@ -1,0 +1,141 @@
+Estrategia sincronica.
+
+   Los sistemas operativos, cuentan con controladores.
+   Todo funciona de manera asincrónica.
+
+   ejemplo: Lectura de un archivo.
+  
+   handler = open(path);
+
+   status -> leerBytes(handler, arrayBytes);
+
+   en el sdk de lenguaje c por ejemplo.
+
+   ir consultando el status: while (status != FINISHED) {
+      voy haciendo otras cosas.
+   }
+
+   // cuando es finished puedo ir al arrayBytes y trabajar con el.
+
+   SDK software development kit.
+
+   Windows como Linux, tienen su sdk.
+
+   La costumbre nuestra en php, java. es que leerArchivo cuando termina
+   la lectura trabajamos con el contenido del archivo.
+
+   Java elije una abstraccion del sdk del sistema operativo sincrónica.
+
+   1. escribir en la consola.
+   2. leer un archivo
+   3. escribir el contenido del archivo en la consola.
+
+   ABSTRACCION SINCRONICA.
+
+   Como es en realidad
+ 
+   1. escribo en la consola
+   2. leo un archivo
+   3. espero el resultado de escribir en la consola o de la lectura del archivo.
+   4. si termino de escribir en la consola no hago nada.
+   5. si termino de escribir en el archivo proceso el contenido.
+   6. luego de procesar el contenido escribo lo procesado en la consola.
+   7. espero el final de la operacion.
+   8. doy por finalizado el proceso.
+
+   SOLUCIONES AL PROBLEMA DE LA ABSTRACCION SINCRONICA
+
+   La solucion para si le cedo el control a una libreria que escribe en disco.
+   y quiero seguir utilizando el procesador.
+
+   Mutiples Threads o Hilos.
+
+   Mientras un hilo realiza una tarea, otro hilo puede realizar otra.
+
+   ----------------------------------------------------------------------------
+
+   Va un cartero a un pueblo, entrega 10 cartas y se tiene que llevar las respuestas.
+   Que pasa: La gente que recibe la carta tiene que leerlas y escribir la respuesta
+   y darsela al cartero.
+
+   Que conviene que el cartero entrege casa1 espere la respuesta y luego a casa 2 
+   espere la respuesta .... hasta casa 10.
+
+   O conviene que entregue las 10, y luego le pide que le avisen cuando esta 
+   la respuesta, y este va recolectando las cartas y se la pica.
+
+   ----------------------------------------------------------------------------
+
+   El APACHE tiene mucho threads y lanza un proceso de php.exe por cada peticion.
+
+   ----------------------------------------------------------------------------
+
+   En la industria de call center, el negocio cual es ?
+
+   Poner la menor cantidad de operadores.
+
+      Que necesito para esto.
+      Informacion de horarios y tiempos de atencion.
+      
+  ----------------------------------------------------------------------------
+  
+  LA MEMORIA
+
+  La memoria esta divida en 
+
+
+
+  VARIABLES GLOBALES (COMPARTIDA CUIDADO !!!!) AREA DEL GARBAGE COLLECTOR (COMPARTIDO)
+
+  STACK... Atencion... el stack es uno por thread. No es compartido.
+
+  Guarda con el menejo de errores.
+
+  Si quiero manejar errores en otro thread, guarda que es otro stack.
+
+  ----------------------------------------------------------------------------
+
+  Como se hacia en c para manejar errores
+
+  pedorro es poner en cada funcion una variable global
+
+  int x = fn1();
+  if (ERROR_LEVEL==0) {
+     confio en el x.
+  }
+
+  cuasi pedorro 
+
+  int x = fn1();
+  if (x == -1) {
+     asumo que hubo un error
+  }  
+
+  sistema mejor
+
+  encapsular la respuesta en un template o generico <T>
+
+  struct Optional<Integer> {
+     boolean valido = true:false;
+     Integer a;
+  }
+   
+  Optionl<Integer> a = fn1();
+  if (a.isPresent()) {
+     lo puedo trabajar
+  }  
+
+  -------------------------------------------------
+
+  CONCURRENTE Y PARALELO
+
+  Concurrente es administrar el procesador para que varios threads
+  utilizen en timeslots y ranuras de tiempo.
+
+  Paralelo es varios procesadores, uno ejecutando un thread diferente.
+
+  -------------------------------------------------
+
+  
+
+  
